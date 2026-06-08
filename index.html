@@ -51,7 +51,7 @@ body {
 #nav nav a {
   color: var(--dm); text-decoration: none;
   padding: 2px 8px; border-radius: 3px;
-  font-size: 15px; transition: .2s;
+  font-size: 17px; transition: .2s;
 }
 #nav nav a:hover { color: var(--g); background: rgba(0,255,136,.08); }
 .lb {
@@ -277,17 +277,17 @@ footer {
 <!-- ── NAVBAR ── -->
 <nav id="nav">
   <span class="prompt">
-    <span style="color:var(--g)">artur</span><span class="at">@</span><span class="ho">portfolio</span><span class="dl">:~$</span>
+    <span style="color:var(--g)">Artur</span><span class="at">@</span><span class="ho">portfolio</span><span class="dl">:~$</span>
     <span class="cur"></span>
   </span>
   <nav>
-    <a href="#about">./about</a>
-    <a href="#experience">./experience</a>
+    <a href="#about"><span class="lpt">./sobre</span><span class="len">./about</span></a>
+    <a href="#experience"><span class="lpt">./experiência</span><span class="len">./experience</span></a>
     <a href="#skills">./skills</a>
-    <a href="#education">./education</a>
-    <a href="#projects">./projects</a>
-    <a href="#repos">./repos</a>
-    <a href="#contact">./contact</a>
+    <a href="#education"><span class="lpt">./educação</span><span class="len">./education</span></a>
+    <a href="#projects"><span class="lpt">./projetos</span><span class="len">./projects</span></a>
+    <a href="#repos"><span class="lpt">./repositórios</span><span class="len">./repos</span></a>
+    <a href="#contact"><span class="lpt">./contato</span><span class="len">./contact</span></a>
   </nav>
   <button class="lb" onclick="toggleLang()" id="langBtn">--lang=en</button>
 </nav>
@@ -322,8 +322,8 @@ footer {
 <!-- ── EXPERIENCE ── -->
 <section id="experience">
   <div class="sh">
-    <span class="lpt">cat experiência.log</span>
-    <span class="len">cat experience.log</span>
+    <span class="lpt">experiência</span>
+    <span class="len">experience</span>
   </div>
 
   <div class="ei">
@@ -418,7 +418,7 @@ footer {
 
 <!-- ── SKILLS ── -->
 <section id="skills">
-  <div class="sh">htop --filter=skills</div>
+  <div class="sh">skills</div>
   <div class="sk-grid">
     <div class="sk-group">
       <div class="sk-group-title lpt">// Engenharia de Dados</div>
@@ -472,8 +472,8 @@ footer {
 <!-- ── EDUCATION ── -->
 <section id="education">
   <div class="sh">
-    <span class="lpt">ls -la educação/</span>
-    <span class="len">ls -la education/</span>
+    <span class="lpt">educação</span>
+    <span class="len">education</span>
   </div>
   <div class="edu">
     <div class="edg"><span class="lpt">Pós-graduação em Engenharia de Dados</span><span class="len">Postgraduate in Data Engineering</span></div>
@@ -500,7 +500,8 @@ footer {
 <!-- ── PROJECTS ── -->
 <section id="projects">
   <div class="sh">
-    <span>git log --oneline ./projects/</span>
+    <span class="lpt">projetos</span>
+    <span class="len">projects</span>
   </div>
   <div class="pg">
 
@@ -603,7 +604,8 @@ footer {
 <!-- ── REPOS ── -->
 <section id="repos">
   <div class="sh">
-    <span>gh repo list arturandrade199-dot</span>
+    <span class="lpt">repositórios</span>
+    <span class="len">repos</span>
   </div>
   <div id="repos-container">
     <p style="color:var(--dm);font-size:12px"><span class="lpt">Carregando repositórios...</span><span class="len">Loading repositories...</span></p>
@@ -613,8 +615,8 @@ footer {
 <!-- ── CONTACT ── -->
 <section id="contact">
   <div class="sh">
-    <span class="lpt">cat contato.json</span>
-    <span class="len">cat contact.json</span>
+    <span class="lpt">contato</span>
+    <span class="len">contact</span>
   </div>
   <div class="cg">
     <a class="ci" href="mailto:arturloureiro.dev@gmail.com">
