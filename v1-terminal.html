@@ -210,6 +210,52 @@ section { margin-bottom: 60px; }
 .cil { color: var(--dm); font-size: 10px; display: block; }
 .civ { color: var(--br); font-size: 12px; }
 
+/* ── PROJECTS ── */
+.pg { display: flex; flex-direction: column; gap: 16px; }
+.pc {
+  background: var(--bg2);
+  border: 1px solid var(--bd);
+  border-radius: 4px; padding: 18px 22px;
+  transition: border-color .25s;
+}
+.pc:hover { border-color: rgba(0,255,136,.4); }
+.ph { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px; flex-wrap: wrap; }
+.pn { color: var(--c); font-weight: 700; font-size: 14px; }
+.pt-sub { color: var(--dm); font-size: 11px; margin-top: 3px; }
+.pl {
+  background: transparent; border: 1px solid var(--g);
+  color: var(--g); font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; padding: 3px 10px; border-radius: 3px;
+  text-decoration: none; transition: .2s; white-space: nowrap; margin-left: auto;
+}
+.pl:hover { background: rgba(0,255,136,.1); }
+.pd { color: var(--tx); font-size: 12px; line-height: 1.8; margin-bottom: 14px; }
+.pa {
+  background: var(--bg3); border: 1px solid var(--bd);
+  border-radius: 3px; padding: 12px 16px; margin-bottom: 14px; overflow-x: auto;
+}
+.pa-label { color: var(--dm); font-size: 10px; margin-bottom: 8px; }
+.pa-flow  { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; }
+.pa-node  {
+  text-align: center; padding: 6px 10px; border-radius: 3px;
+  border: 1px solid; font-size: 10px; white-space: nowrap;
+}
+.pa-node-name { font-weight: 700; }
+.pa-node-sub  { font-size: 9px; opacity: .7; margin-top: 1px; }
+.pa-stage     { border-color: var(--dm); color: var(--dm); }
+.pa-bronze    { border-color: #c97c2e; color: #f59e0b; }
+.pa-silver    { border-color: var(--dm); color: var(--tx); }
+.pa-gold      { border-color: var(--y); color: var(--y); }
+.pa-analytics { border-color: var(--c); color: var(--c); }
+.pa-arrow     { color: var(--dm); font-size: 11px; }
+.pf { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 9px; margin-bottom: 12px; }
+.pfi {
+  background: var(--bg3); border: 1px solid var(--bd);
+  border-radius: 3px; padding: 10px 13px;
+}
+.pfi-title { color: var(--g); font-size: 11px; font-weight: 700; margin-bottom: 4px; }
+.pfi-desc  { color: var(--dm); font-size: 10.5px; line-height: 1.65; }
+
 /* ── FOOTER ── */
 footer {
   text-align: center; padding: 20px;
@@ -238,6 +284,7 @@ footer {
     <a href="#experience">./experience</a>
     <a href="#skills">./skills</a>
     <a href="#education">./education</a>
+    <a href="#projects">./projects</a>
     <a href="#repos">./repos</a>
     <a href="#contact">./contact</a>
   </nav>
@@ -432,6 +479,93 @@ footer {
     <div class="edg"><span class="lpt">Tecnólogo em Análise e Desenvolvimento de Sistemas</span><span class="len">B.Sc. in Systems Analysis and Development</span></div>
     <div class="eds">Estácio</div>
     <div class="edd">2021 – 2023</div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ── -->
+<section id="projects">
+  <div class="sh">
+    <span>git log --oneline ./projects/</span>
+  </div>
+  <div class="pg">
+
+    <div class="pc">
+      <div class="ph">
+        <div style="flex:1">
+          <div class="pn">❄ snowflake-finance</div>
+          <div class="pt-sub lpt">Pipeline de dados de mercado financeiro — produção no Snowflake</div>
+          <div class="pt-sub len">Production-grade financial market data pipeline on Snowflake</div>
+        </div>
+        <a class="pl" href="https://github.com/arturandrade199-dot/snowflake-finance" target="_blank">↗ github</a>
+      </div>
+
+      <p class="pd lpt">Pipeline completo do mercado de ações americano (14 tickers, ~21k linhas/ticker, 2020–2025) construído inteiramente dentro do Snowflake. Demonstra padrões de engenharia de dados de produção: ingestão em lote via COPY INTO, CDC com Streams, Task DAG automático, indicadores técnicos com window functions e Snowpark Python rodando dentro da plataforma.</p>
+      <p class="pd len">End-to-end US equity market pipeline (14 tickers, ~21k rows/ticker, 2020–2025) built entirely inside Snowflake. Demonstrates production Data Engineering patterns: batch ingestion via COPY INTO, CDC with Streams, automated Task DAG, technical indicators via window functions, and Snowpark Python running inside the platform.</p>
+
+      <div class="pa">
+        <div class="pa-label">// MEDALLION ARCHITECTURE · Bronze → Silver → Gold → Analytics</div>
+        <div class="pa-flow">
+          <div class="pa-node pa-stage">
+            <div class="pa-node-name">CSV · Stage</div>
+            <div class="pa-node-sub">PUT · COPY INTO</div>
+          </div>
+          <span class="pa-arrow">→</span>
+          <div class="pa-node pa-bronze">
+            <div class="pa-node-name">BRONZE</div>
+            <div class="pa-node-sub">Raw · audit trail</div>
+          </div>
+          <span class="pa-arrow">→</span>
+          <div class="pa-node pa-silver">
+            <div class="pa-node-name">SILVER</div>
+            <div class="pa-node-sub">MERGE · QUALIFY</div>
+          </div>
+          <span class="pa-arrow">→</span>
+          <div class="pa-node pa-gold">
+            <div class="pa-node-name">GOLD</div>
+            <div class="pa-node-sub">Window functions</div>
+          </div>
+          <span class="pa-arrow">→</span>
+          <div class="pa-node pa-analytics">
+            <div class="pa-node-name">ANALYTICS</div>
+            <div class="pa-node-sub">BI-ready views</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pf">
+        <div class="pfi">
+          <div class="pfi-title">⚡ CDC + Task DAG <span class="lpt">automático</span><span class="len">automated</span></div>
+          <div class="pfi-desc lpt">Snowflake Streams captura novas linhas; Task DAG encadeado (Bronze → Silver → Gold) executa diariamente após o fechamento do mercado</div>
+          <div class="pfi-desc len">Snowflake Streams captures new rows; chained Task DAG (Bronze → Silver → Gold) runs daily after market close automatically</div>
+        </div>
+        <div class="pfi">
+          <div class="pfi-title">🐍 Snowpark Python · RSI-14</div>
+          <div class="pfi-desc lpt">Stored procedure em Python rodando dentro do Snowflake — calcula RSI-14 com pandas, sem mover dados para fora da plataforma</div>
+          <div class="pfi-desc len">Python stored procedure running inside Snowflake — computes RSI-14 with pandas, zero data movement outside the platform</div>
+        </div>
+        <div class="pfi">
+          <div class="pfi-title">📈 10+ <span class="lpt">indicadores técnicos</span><span class="len">technical indicators</span></div>
+          <div class="pfi-desc">SMA 7/20/50/200 · Bollinger Bands · ATR-14 · MACD · RSI-14 · Sharpe Ratio 30D · Momentum 5D/21D · Max Drawdown · Advance/Decline Ratio</div>
+        </div>
+        <div class="pfi">
+          <div class="pfi-title">🏗 <span class="lpt">Arquitetura Medallion completa</span><span class="len">Full Medallion architecture</span></div>
+          <div class="pfi-desc lpt">5 schemas · SCD-1 via MERGE · dimensão calendário por CTE recursiva · CLUSTER BY para query pruning · Resource Monitor</div>
+          <div class="pfi-desc len">5 schemas · SCD-1 via MERGE · calendar dim via recursive CTE · CLUSTER BY for query pruning · Resource Monitor</div>
+        </div>
+      </div>
+
+      <div class="et">
+        <span class="tag">Snowflake</span>
+        <span class="tag">Snowpark Python</span>
+        <span class="tag">Medallion Architecture</span>
+        <span class="tag">CDC Streams</span>
+        <span class="tag">Task DAG</span>
+        <span class="tag">Window Functions</span>
+        <span class="tag">MERGE · QUALIFY</span>
+        <span class="tag">Pandas</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
