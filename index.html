@@ -148,23 +148,24 @@ section { margin-bottom: 60px; }
 }
 
 /* ── SKILLS ── */
-.sg { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 18px; }
-.sk {
+.sk-grid { display: flex; flex-direction: column; gap: 12px; }
+.sk-group {
   background: var(--bg2);
   border: 1px solid var(--bd);
-  border-radius: 4px; padding: 18px;
+  border-radius: 4px; padding: 18px 20px;
 }
-.skt { color: var(--y); font-size: 14px; letter-spacing: 2px; margin-bottom: 14px; }
-.si { margin-bottom: 9px; }
-.sl { display: flex; justify-content: space-between; margin-bottom: 3px; }
-.sn { color: var(--br); font-size: 16px; }
-.sp { color: var(--g); font-size: 15px; }
-.sbg { background: var(--bg3); height: 7px; border-radius: 2px; overflow: hidden; }
-.sbf {
-  height: 100%;
-  background: linear-gradient(90deg, var(--g), var(--c));
-  border-radius: 2px; width: 0;
-  transition: width 1.3s ease;
+.sk-group-title { color: var(--y); font-size: 13px; letter-spacing: 2px; margin-bottom: 14px; }
+.sk-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.stag {
+  background: rgba(0,191,255,.07);
+  border: 1px solid rgba(0,191,255,.2);
+  color: var(--br); padding: 6px 14px;
+  border-radius: 3px; font-size: 15px;
+}
+.stag-g {
+  background: rgba(0,255,136,.07);
+  border-color: rgba(0,255,136,.25);
+  color: var(--g);
 }
 
 /* ── EDUCATION ── */
@@ -197,7 +198,7 @@ section { margin-bottom: 60px; }
 .repos-note { color: var(--y); font-size: 15px; margin-bottom: 14px; }
 
 /* ── CONTACT ── */
-.cg { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+.cg { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; }
 .ci {
   background: var(--bg2);
   border: 1px solid var(--bd);
@@ -208,7 +209,7 @@ section { margin-bottom: 60px; }
 .ci:hover { border-color: var(--g); }
 .cic { color: var(--g); font-size: 16px; width: 20px; text-align: center; }
 .cil { color: var(--dm); font-size: 13px; display: block; }
-.civ { color: var(--br); font-size: 16px; }
+.civ { color: var(--br); font-size: 16px; word-break: break-word; }
 
 /* ── PROJECTS ── */
 .pg { display: flex; flex-direction: column; gap: 16px; }
@@ -418,38 +419,52 @@ footer {
 <!-- ── SKILLS ── -->
 <section id="skills">
   <div class="sh">htop --filter=skills</div>
-  <div class="sg">
-    <div class="sk">
-      <div class="skt">// DATA ENGINEERING</div>
-      <div class="si"><div class="sl"><span class="sn">ETL / ELT Pipelines</span><span class="sp">90%</span></div><div class="sbg"><div class="sbf" data-w="90"></div></div></div>
-      <div class="si"><div class="sl"><span class="sn">Oracle PL/SQL</span><span class="sp">85%</span></div><div class="sbg"><div class="sbf" data-w="85"></div></div></div>
-      <div class="si"><div class="sl"><span class="sn">REST APIs — integração</span><span class="sp">85%</span></div><div class="sbg"><div class="sbf" data-w="85"></div></div></div>
-      <div class="si"><div class="sl"><span class="sn">Python · Pandas · PySpark</span><span class="sp">80%</span></div><div class="sbg"><div class="sbf" data-w="80"></div></div></div>
-      <div class="si"><div class="sl"><span class="sn">AWS S3 · EC2</span><span class="sp">70%</span></div><div class="sbg"><div class="sbf" data-w="70"></div></div></div>
-      <div class="si"><div class="sl"><span class="sn">Apache Airflow</span><span class="sp">70%</span></div><div class="sbg"><div class="sbf" data-w="70"></div></div></div>
-      <div class="si"><div class="sl"><span class="sn">Snowflake</span><span class="sp">65%</span></div><div class="sbg"><div class="sbf" data-w="65"></div></div></div>
+  <div class="sk-grid">
+    <div class="sk-group">
+      <div class="sk-group-title lpt">// Engenharia de Dados</div>
+      <div class="sk-group-title len">// Data Engineering</div>
+      <div class="sk-tags">
+        <span class="stag">Python</span>
+        <span class="stag">PySpark</span>
+        <span class="stag">Apache Airflow</span>
+        <span class="stag">ETL / ELT</span>
+        <span class="stag">Snowflake</span>
+        <span class="stag">AWS S3 · EC2</span>
+        <span class="stag">Pandas</span>
+        <span class="stag">REST APIs</span>
+      </div>
     </div>
-    <div class="sk">
-      <div class="skt">// DATABASES & DEVOPS</div>
-      <div class="si"><div class="sl"><span class="sn">PostgreSQL · SQL Server</span><span class="sp">90%</span></div><div class="sbg"><div class="sbf" data-w="90"></div></div></div>
-      <div class="si"><div class="sl"><span class="sn">Git · GitHub · SVN</span><span class="sp">90%</span></div><div class="sbg"><div class="sbf" data-w="90"></div></div></div>
-      <div class="si"><div class="sl"><span class="sn">MySQL · Firebird</span><span class="sp">80%</span></div><div class="sbg"><div class="sbf" data-w="80"></div></div></div>
-      <div class="si"><div class="sl"><span class="sn">Azure DevOps · Jira</span><span class="sp">80%</span></div><div class="sbg"><div class="sbf" data-w="80"></div></div></div>
-      <div class="si"><div class="sl"><span class="sn">DUnit · DUnitX</span><span class="sp">75%</span></div><div class="sbg"><div class="sbf" data-w="75"></div></div></div>
-      <div class="si"><div class="sl"><span class="sn">Jenkins CI/CD</span><span class="sp">60%</span></div><div class="sbg"><div class="sbf" data-w="60"></div></div></div>
+    <div class="sk-group">
+      <div class="sk-group-title lpt">// SQL & Bancos de Dados</div>
+      <div class="sk-group-title len">// SQL & Databases</div>
+      <div class="sk-tags">
+        <span class="stag">Oracle PL/SQL</span>
+        <span class="stag">PostgreSQL</span>
+        <span class="stag">SQL Server</span>
+        <span class="stag">MySQL</span>
+        <span class="stag">Firebird</span>
+      </div>
     </div>
-    <div class="sk">
-      <div class="skt">// SOFTWARE DEVELOPMENT</div>
-      <div class="si"><div class="sl"><span class="sn">Delphi 5–11 (especialista)</span><span class="sp">95%</span></div><div class="sbg"><div class="sbf" data-w="95"></div></div></div>
-      <div class="si"><div class="sl"><span class="sn">C# .NET Framework/Core</span><span class="sp">60%</span></div><div class="sbg"><div class="sbf" data-w="60"></div></div></div>
-      <div class="si"><div class="sl"><span class="sn">HTML · CSS · JavaScript</span><span class="sp">55%</span></div><div class="sbg"><div class="sbf" data-w="55"></div></div></div>
-      <div class="si"><div class="sl"><span class="sn">Angular · React</span><span class="sp">40%</span></div><div class="sbg"><div class="sbf" data-w="40"></div></div></div>
+    <div class="sk-group">
+      <div class="sk-group-title lpt">// DevOps & Ferramentas</div>
+      <div class="sk-group-title len">// DevOps & Tools</div>
+      <div class="sk-tags">
+        <span class="stag">Git · GitHub</span>
+        <span class="stag">Azure DevOps</span>
+        <span class="stag">Jenkins CI/CD</span>
+        <span class="stag">Jira</span>
+        <span class="stag">Delphi 5–11</span>
+        <span class="stag">C# .NET</span>
+      </div>
     </div>
-    <div class="sk">
-      <div class="skt">// IDIOMAS / LANGUAGES</div>
-      <div class="si"><div class="sl"><span class="sn">Português (nativo)</span><span class="sp">100%</span></div><div class="sbg"><div class="sbf" data-w="100"></div></div></div>
-      <div class="si"><div class="sl"><span class="sn">English — Fluent (TOEIC)</span><span class="sp">90%</span></div><div class="sbg"><div class="sbf" data-w="90"></div></div></div>
-      <div class="si"><div class="sl"><span class="sn">Français — Básico (A2)</span><span class="sp">25%</span></div><div class="sbg"><div class="sbf" data-w="25"></div></div></div>
+    <div class="sk-group">
+      <div class="sk-group-title">// Idiomas / Languages</div>
+      <div class="sk-tags">
+        <span class="stag stag-g lpt">Português — Nativo</span>
+        <span class="stag stag-g len">Portuguese — Native</span>
+        <span class="stag stag-g">English — Fluent · TOEIC</span>
+        <span class="stag">Français — A2</span>
+      </div>
     </div>
   </div>
 </section>
@@ -499,70 +514,86 @@ footer {
         <a class="pl" href="https://github.com/arturandrade199-dot/snowflake-finance" target="_blank">↗ github</a>
       </div>
 
-      <p class="pd lpt">Pipeline completo do mercado de ações americano (14 tickers, ~21k linhas/ticker, 2020–2025) construído inteiramente dentro do Snowflake. Demonstra padrões de engenharia de dados de produção: ingestão em lote via COPY INTO, CDC com Streams, Task DAG automático, indicadores técnicos com window functions e Snowpark Python rodando dentro da plataforma.</p>
-      <p class="pd len">End-to-end US equity market pipeline (14 tickers, ~21k rows/ticker, 2020–2025) built entirely inside Snowflake. Demonstrates production Data Engineering patterns: batch ingestion via COPY INTO, CDC with Streams, automated Task DAG, technical indicators via window functions, and Snowpark Python running inside the platform.</p>
+      <p class="pd lpt">Pipeline automatizado que coleta e processa dados diários do mercado de ações americano — 14 empresas, 5 anos de histórico (2020–2025). Roda sozinho toda noite: recebe os arquivos, organiza os dados em camadas e entrega métricas de desempenho prontas para análise, sem nenhuma intervenção manual.</p>
+      <p class="pd len">Automated pipeline that collects and processes daily US stock market data — 14 companies, 5 years of history (2020–2025). Runs every night on its own: receives files, organizes data into layers, and delivers performance metrics ready for analysis, with zero manual intervention.</p>
 
       <div class="pa">
-        <div class="pa-label">// MEDALLION ARCHITECTURE · Bronze → Silver → Gold → Analytics</div>
+        <div class="pa-label lpt">// Fluxo dos dados: do arquivo bruto ao painel final</div>
+        <div class="pa-label len">// Data flow: from raw file to final dashboard</div>
         <div class="pa-flow">
           <div class="pa-node pa-stage">
-            <div class="pa-node-name">CSV · Stage</div>
-            <div class="pa-node-sub">PUT · COPY INTO</div>
+            <div class="pa-node-name lpt">Arquivos</div>
+            <div class="pa-node-name len">Files</div>
+            <div class="pa-node-sub lpt">Entrada dos dados</div>
+            <div class="pa-node-sub len">Data input</div>
           </div>
           <span class="pa-arrow">→</span>
           <div class="pa-node pa-bronze">
-            <div class="pa-node-name">BRONZE</div>
-            <div class="pa-node-sub">Raw · audit trail</div>
+            <div class="pa-node-name lpt">Bruto</div>
+            <div class="pa-node-name len">Raw</div>
+            <div class="pa-node-sub lpt">Dado original</div>
+            <div class="pa-node-sub len">Original data</div>
           </div>
           <span class="pa-arrow">→</span>
           <div class="pa-node pa-silver">
-            <div class="pa-node-name">SILVER</div>
-            <div class="pa-node-sub">MERGE · QUALIFY</div>
+            <div class="pa-node-name lpt">Limpo</div>
+            <div class="pa-node-name len">Clean</div>
+            <div class="pa-node-sub lpt">Validado</div>
+            <div class="pa-node-sub len">Validated</div>
           </div>
           <span class="pa-arrow">→</span>
           <div class="pa-node pa-gold">
-            <div class="pa-node-name">GOLD</div>
-            <div class="pa-node-sub">Window functions</div>
+            <div class="pa-node-name lpt">Enriquecido</div>
+            <div class="pa-node-name len">Enriched</div>
+            <div class="pa-node-sub lpt">Métricas calculadas</div>
+            <div class="pa-node-sub len">Metrics computed</div>
           </div>
           <span class="pa-arrow">→</span>
           <div class="pa-node pa-analytics">
-            <div class="pa-node-name">ANALYTICS</div>
-            <div class="pa-node-sub">BI-ready views</div>
+            <div class="pa-node-name lpt">Painel</div>
+            <div class="pa-node-name len">Dashboard</div>
+            <div class="pa-node-sub lpt">Pronto para uso</div>
+            <div class="pa-node-sub len">Ready to use</div>
           </div>
         </div>
       </div>
 
       <div class="pf">
         <div class="pfi">
-          <div class="pfi-title">⚡ CDC + Task DAG <span class="lpt">automático</span><span class="len">automated</span></div>
-          <div class="pfi-desc lpt">Snowflake Streams captura novas linhas; Task DAG encadeado (Bronze → Silver → Gold) executa diariamente após o fechamento do mercado</div>
-          <div class="pfi-desc len">Snowflake Streams captures new rows; chained Task DAG (Bronze → Silver → Gold) runs daily after market close automatically</div>
+          <div class="pfi-title lpt">⚡ 100% automatizado</div>
+          <div class="pfi-title len">⚡ 100% automated</div>
+          <div class="pfi-desc lpt">O sistema identifica dados novos e processa tudo sozinho toda noite — como um analista que nunca precisa de lembrete</div>
+          <div class="pfi-desc len">The system detects new data and processes everything on its own every night — like an analyst who never needs a reminder</div>
         </div>
         <div class="pfi">
-          <div class="pfi-title">🐍 Snowpark Python · RSI-14</div>
-          <div class="pfi-desc lpt">Stored procedure em Python rodando dentro do Snowflake — calcula RSI-14 com pandas, sem mover dados para fora da plataforma</div>
-          <div class="pfi-desc len">Python stored procedure running inside Snowflake — computes RSI-14 with pandas, zero data movement outside the platform</div>
+          <div class="pfi-title lpt">📈 Métricas prontas para uso</div>
+          <div class="pfi-title len">📈 Ready-made metrics</div>
+          <div class="pfi-desc lpt">Entrega 10+ indicadores de desempenho — tendências de preço, risco de mercado e sinais de compra/venda — prontos para dashboards</div>
+          <div class="pfi-desc len">Delivers 10+ performance indicators — price trends, market risk, and buy/sell signals — ready to plug into any dashboard</div>
         </div>
         <div class="pfi">
-          <div class="pfi-title">📈 10+ <span class="lpt">indicadores técnicos</span><span class="len">technical indicators</span></div>
-          <div class="pfi-desc">SMA 7/20/50/200 · Bollinger Bands · ATR-14 · MACD · RSI-14 · Sharpe Ratio 30D · Momentum 5D/21D · Max Drawdown · Advance/Decline Ratio</div>
+          <div class="pfi-title lpt">🗂 Dados organizados em camadas</div>
+          <div class="pfi-title len">🗂 Layered data organization</div>
+          <div class="pfi-desc lpt">Dado bruto, limpo e analítico ficam separados — fácil de auditar, corrigir erros ou adicionar novas análises sem reprocessar tudo</div>
+          <div class="pfi-desc len">Raw, clean, and analytical data stay separate — easy to audit, fix mistakes, or add new analyses without reprocessing everything</div>
         </div>
         <div class="pfi">
-          <div class="pfi-title">🏗 <span class="lpt">Arquitetura Medallion completa</span><span class="len">Full Medallion architecture</span></div>
-          <div class="pfi-desc lpt">5 schemas · SCD-1 via MERGE · dimensão calendário por CTE recursiva · CLUSTER BY para query pruning · Resource Monitor</div>
-          <div class="pfi-desc len">5 schemas · SCD-1 via MERGE · calendar dim via recursive CTE · CLUSTER BY for query pruning · Resource Monitor</div>
+          <div class="pfi-title lpt">☁ Processamento na nuvem</div>
+          <div class="pfi-title len">☁ Cloud-native processing</div>
+          <div class="pfi-desc lpt">Toda a lógica roda diretamente na nuvem — sem servidores extras para gerenciar, sem custo adicional de infraestrutura</div>
+          <div class="pfi-desc len">All logic runs directly in the cloud — no extra servers to manage, no additional infrastructure cost</div>
         </div>
       </div>
 
       <div class="et">
         <span class="tag">Snowflake</span>
-        <span class="tag">Snowpark Python</span>
-        <span class="tag">Medallion Architecture</span>
-        <span class="tag">CDC Streams</span>
-        <span class="tag">Task DAG</span>
-        <span class="tag">Window Functions</span>
-        <span class="tag">MERGE · QUALIFY</span>
+        <span class="tag">Python</span>
+        <span class="tag">Pipeline Automatizado</span>
+        <span class="tag">Dados Financeiros</span>
+        <span class="tag">Arquitetura em Camadas</span>
+        <span class="tag">SQL Avançado</span>
         <span class="tag">Pandas</span>
+        <span class="tag">AWS</span>
       </div>
     </div>
 
