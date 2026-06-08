@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artur Loureiro · Data Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:  #0a0e17;
+  --bg2: #0f1623;
+  --bg3: #141e2e;
+  --g:   #00ff88;
+  --c:   #00bfff;
+  --y:   #ffd700;
+  --r:   #ff4757;
+  --p:   #a78bfa;
+  --tx:  #8892a4;
+  --br:  #e2e8f0;
+  --dm:  #4a5568;
+  --bd:  #1e2d3d;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--tx);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--bd); border-radius: 3px; }
+
+/* ── NAVBAR ── */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--bd);
+  padding: 9px 20px;
+  display: flex; align-items: center; gap: 12px;
+  z-index: 100; flex-wrap: wrap;
+}
+.prompt { color: var(--g); font-weight: 700; font-size: 12px; white-space: nowrap; }
+.prompt .at  { color: var(--dm); }
+.prompt .ho  { color: var(--c); }
+.prompt .dl  { color: var(--dm); }
+#nav nav { display: flex; gap: 2px; flex: 1; flex-wrap: wrap; }
+#nav nav a {
+  color: var(--dm); text-decoration: none;
+  padding: 2px 8px; border-radius: 3px;
+  font-size: 12px; transition: .2s;
+}
+#nav nav a:hover { color: var(--g); background: rgba(0,255,136,.08); }
+.lb {
+  background: transparent;
+  border: 1px solid var(--bd);
+  color: var(--y);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; padding: 3px 11px;
+  border-radius: 3px; cursor: pointer; transition: .2s;
+}
+.lb:hover { border-color: var(--y); background: rgba(255,215,0,.08); }
+
+/* ── CURSOR BLINK ── */
+.cur {
+  display: inline-block;
+  background: var(--g);
+  width: 7px; height: 13px;
+  animation: blink 1s step-end infinite;
+  vertical-align: middle; margin-left: 2px;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ── MAIN ── */
+main { max-width: 880px; margin: 0 auto; padding: 72px 20px 60px; }
+
+/* ── SECTION HEADERS ── */
+.sh {
+  color: var(--g); font-size: 10px;
+  letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.sh::before { content: '$'; color: var(--dm); }
+.sh::after  { content: ''; flex: 1; height: 1px; background: var(--bd); }
+section { margin-bottom: 60px; }
+
+/* ── BOOT ── */
+#boot-section {
+  min-height: calc(100vh - 72px);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 40px 0 20px;
+}
+.bl { display: block; opacity: 0; animation: fi .07s forwards; }
+@keyframes fi { to { opacity: 1; } }
+.bl.g  { color: var(--g); }
+.bl.c  { color: var(--c); }
+.bl.y  { color: var(--y); }
+.bl.dm { color: var(--dm); }
+.bl.br { color: var(--br); }
+
+#hero { display: none; margin-top: 28px; }
+.hn {
+  font-size: clamp(26px,5vw,48px);
+  font-weight: 700; color: var(--g);
+  text-shadow: 0 0 24px rgba(0,255,136,.3);
+  letter-spacing: 2px; margin-bottom: 4px;
+}
+.ht { color: var(--c); font-size: clamp(11px,1.8vw,13px); margin-bottom: 20px; }
+
+.ab {
+  background: var(--bg2);
+  border: 1px solid var(--bd);
+  border-radius: 4px; padding: 20px 22px; margin-bottom: 20px;
+}
+.ab p { color: var(--tx); line-height: 1.9; }
+.hl { color: var(--c); }
+
+.hm { display: flex; flex-wrap: wrap; gap: 14px; }
+.hm a, .hm span { color: var(--dm); text-decoration: none; font-size: 12px; }
+.hm a:hover { color: var(--c); }
+.tg { color: var(--g); }
+
+/* ── EXPERIENCE ── */
+.ei {
+  background: var(--bg2);
+  border: 1px solid var(--bd);
+  border-radius: 4px; padding: 18px 22px; margin-bottom: 14px;
+  transition: border-color .25s;
+}
+.ei:hover { border-color: rgba(0,255,136,.4); }
+.ec { color: var(--y); font-size: 11px; margin-bottom: 3px; }
+.er { color: var(--br); font-weight: 700; font-size: 14px; }
+.em { color: var(--c); }
+.ed { color: var(--dm); font-size: 11px; margin-bottom: 10px; }
+.el { list-style: none; padding: 0; }
+.el li { color: var(--tx); font-size: 12px; padding: 2px 0 2px 15px; position: relative; }
+.el li::before { content: '+ '; color: var(--g); position: absolute; left: 0; }
+.et { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 11px; }
+.tag {
+  background: rgba(0,191,255,.07);
+  border: 1px solid rgba(0,191,255,.2);
+  color: var(--c); padding: 2px 7px;
+  border-radius: 3px; font-size: 10px;
+}
+
+/* ── SKILLS ── */
+.sg { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 18px; }
+.sk {
+  background: var(--bg2);
+  border: 1px solid var(--bd);
+  border-radius: 4px; padding: 18px;
+}
+.skt { color: var(--y); font-size: 10px; letter-spacing: 2px; margin-bottom: 14px; }
+.si { margin-bottom: 9px; }
+.sl { display: flex; justify-content: space-between; margin-bottom: 3px; }
+.sn { color: var(--br); font-size: 12px; }
+.sp { color: var(--g); font-size: 11px; }
+.sbg { background: var(--bg3); height: 7px; border-radius: 2px; overflow: hidden; }
+.sbf {
+  height: 100%;
+  background: linear-gradient(90deg, var(--g), var(--c));
+  border-radius: 2px; width: 0;
+  transition: width 1.3s ease;
+}
+
+/* ── EDUCATION ── */
+.edu {
+  background: var(--bg2);
+  border-left: 3px solid var(--p);
+  padding: 14px 18px; margin-bottom: 10px;
+  border-radius: 0 4px 4px 0;
+  transition: border-color .2s;
+}
+.edu:hover { border-left-color: var(--g); }
+.edg { color: var(--br); font-weight: 700; font-size: 13px; }
+.eds { color: var(--c); font-size: 12px; }
+.edd { color: var(--dm); font-size: 11px; }
+
+/* ── REPOS ── */
+.rg { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 13px; }
+.rc {
+  background: var(--bg2);
+  border: 1px solid var(--bd);
+  border-radius: 4px; padding: 15px;
+  text-decoration: none; display: block; transition: .2s;
+}
+.rc:hover { border-color: var(--g); transform: translateY(-2px); }
+.rn { color: var(--c); font-weight: 700; font-size: 13px; margin-bottom: 5px; }
+.rd { color: var(--tx); font-size: 11px; line-height: 1.65; margin-bottom: 11px; min-height: 34px; }
+.rf { display: flex; gap: 10px; font-size: 10px; color: var(--dm); }
+.rl::before { content: '● '; color: var(--y); }
+.rs::before { content: '★ '; color: var(--y); }
+.repos-note { color: var(--y); font-size: 11px; margin-bottom: 14px; }
+
+/* ── CONTACT ── */
+.cg { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+.ci {
+  background: var(--bg2);
+  border: 1px solid var(--bd);
+  border-radius: 4px; padding: 14px 16px;
+  text-decoration: none; transition: .2s;
+  display: flex; align-items: center; gap: 10px;
+}
+.ci:hover { border-color: var(--g); }
+.cic { color: var(--g); font-size: 16px; width: 20px; text-align: center; }
+.cil { color: var(--dm); font-size: 10px; display: block; }
+.civ { color: var(--br); font-size: 12px; }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center; padding: 20px;
+  color: var(--dm); font-size: 11px;
+  border-top: 1px solid var(--bd);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 620px) {
+  .sg { grid-template-columns: 1fr; }
+  .hn { font-size: 24px; }
+  #nav nav a { font-size: 11px; padding: 2px 5px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav id="nav">
+  <span class="prompt">
+    <span style="color:var(--g)">artur</span><span class="at">@</span><span class="ho">portfolio</span><span class="dl">:~$</span>
+    <span class="cur"></span>
+  </span>
+  <nav>
+    <a href="#about">./about</a>
+    <a href="#experience">./experience</a>
+    <a href="#skills">./skills</a>
+    <a href="#education">./education</a>
+    <a href="#repos">./repos</a>
+    <a href="#contact">./contact</a>
+  </nav>
+  <button class="lb" onclick="toggleLang()" id="langBtn">--lang=en</button>
+</nav>
+
+<main>
+
+<!-- ── HERO / BOOT ── -->
+<section id="about">
+  <div id="boot-section">
+    <div id="boot-out"></div>
+    <div id="hero">
+      <div class="hn">ARTUR LOUREIRO</div>
+      <div class="ht">
+        <span class="lpt">ENGENHEIRO DE DADOS | Python · PL/SQL · PySpark · Airflow · AWS · Snowflake · ETL/ELT</span>
+        <span class="len">DATA ENGINEER | Python · PL/SQL · PySpark · Airflow · AWS · Snowflake · ETL/ELT</span>
+      </div>
+      <div class="ab">
+        <p class="lpt">Engenheiro de Dados com mais de <span class="hl">6 anos de experiência</span> em desenvolvimento de software e atuação atual em engenharia de dados em produção. Especialista em <span class="hl">pipelines robustos</span> com Oracle PL/SQL e integração de APIs REST. Participou do projeto estratégico da <span class="hl">Reforma Tributária</span>, implementando regras fiscais críticas. Fluente em inglês (certificação <span class="hl">TOEIC</span>). Aberto a <span class="hl">oportunidades remotas</span>.</p>
+        <p class="len">Data Engineer with <span class="hl">6+ years</span> of software engineering experience and current hands-on data engineering in production. Specialized in <span class="hl">robust data pipelines</span> with Oracle PL/SQL and REST API integrations. Contributed to <span class="hl">Brazil's Tax Reform</span> project implementing critical fiscal rules. <span class="hl">TOEIC certified</span> — open to <span class="hl">remote international roles</span>.</p>
+      </div>
+      <div class="hm">
+        <a href="mailto:arturloureiro.dev@gmail.com"><span class="tg">✉</span> arturloureiro.dev@gmail.com</a>
+        <a href="https://linkedin.com/in/artur-loureiro-7abbb8135" target="_blank"><span class="tg">in</span> LinkedIn</a>
+        <a href="https://github.com/arturandrade199-dot" target="_blank"><span class="tg">⌥</span> GitHub</a>
+        <span><span class="tg">◉</span> Rio de Janeiro, RJ</span>
+        <span><span class="tg">☎</span> (24) 99206-5490</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ── -->
+<section id="experience">
+  <div class="sh">
+    <span class="lpt">cat experiência.log</span>
+    <span class="len">cat experience.log</span>
+  </div>
+
+  <div class="ei">
+    <div class="ec">commit c4a91f2 (HEAD → main) · Jan 2026 → <span class="lpt">Atual</span><span class="len">Present</span></div>
+    <div class="er">Data Engineer<span class="em"> @ Vayon Insurance Solutions</span></div>
+    <div class="ed"><span class="lpt">Remoto · Seguros Financeiros</span><span class="len">Remote · Financial Insurance Domain</span></div>
+    <ul class="el">
+      <li class="lpt">Desenvolvimento e manutenção de pipelines robustos com Oracle PL/SQL para ingestão, transformação e entrega</li>
+      <li class="len">Built and maintained robust Oracle PL/SQL data pipelines for large-scale ingestion and transformation</li>
+      <li class="lpt">Integração de dados via APIs REST com ingestão rastreável de fontes externas para pipelines de negócio</li>
+      <li class="len">Integrated external data sources via REST API ensuring reliable, traceable, and auditable ingestion</li>
+      <li class="lpt">Desenho e apresentação de arquiteturas de dados para stakeholders técnicos e de negócio</li>
+      <li class="len">Designed and presented data architectures to technical and business stakeholders</li>
+      <li class="lpt">Supervisão e mentoria de analistas de dados — boas práticas e evolução técnica do time</li>
+      <li class="len">Mentored data analysts, driving best practices, delivery quality, and team technical growth</li>
+    </ul>
+    <div class="et">
+      <span class="tag">Oracle PL/SQL</span><span class="tag">REST APIs</span>
+      <span class="tag">ETL/ELT</span><span class="tag">Data Pipelines</span><span class="tag">Mentoring</span>
+    </div>
+  </div>
+
+  <div class="ei">
+    <div class="ec">commit 7b3e8d1 · Mar 2024 → Jan 2026</div>
+    <div class="er">Software Engineer / Delphi Developer<span class="em"> @ Alterdata Software</span></div>
+    <div class="ed"><span class="lpt">Remoto · Módulos Fiscais e Contábeis</span><span class="len">Remote · Fiscal & Accounting Modules</span></div>
+    <ul class="el">
+      <li class="lpt">Projeto estratégico da Reforma Tributária: regras fiscais críticas e integração com APIs governamentais em larga escala</li>
+      <li class="len">Brazil's Tax Reform project: implemented critical fiscal rules and government REST APIs at scale</li>
+      <li class="lpt">Migração Delphi 10.2 → Delphi 11 garantindo retrocompatibilidade, estabilidade e melhoria de performance</li>
+      <li class="len">Migrated project from Delphi 10.2 to Delphi 11, ensuring backward compatibility, stability, and performance</li>
+      <li class="lpt">Expansão da suíte de testes de ~30 para ~120 cenários — +4x cobertura, redução de retrabalho</li>
+      <li class="len">Expanded automated test suite from ~30 to ~120 scenarios (~4x), significantly reducing defect rates</li>
+      <li class="lpt">Code reviews recorrentes — reconhecido por liderança técnica e proatividade</li>
+      <li class="len">Led recurring code reviews; recognized by the team for technical leadership and proactivity</li>
+    </ul>
+    <div class="et">
+      <span class="tag">Delphi 11</span><span class="tag">PostgreSQL</span><span class="tag">SQL Server</span>
+      <span class="tag">DUnit/DUnitX</span><span class="tag">Reforma Tributária</span><span class="tag">Git</span>
+    </div>
+  </div>
+
+  <div class="ei">
+    <div class="ec">commit 5d2f7a9 · Nov 2023 → Feb 2024</div>
+    <div class="er">Software Engineer / Delphi Developer<span class="em"> @ Viasoft Korp ERP</span></div>
+    <div class="ed"><span class="lpt">Remoto · Logística Industrial</span><span class="len">Remote · Industrial Logistics</span></div>
+    <ul class="el">
+      <li class="lpt">Manutenção e evolução de sistema legado de logística industrial em Delphi 10.4</li>
+      <li class="len">Maintained and enhanced legacy industrial logistics ERP in Delphi 10.4</li>
+      <li class="lpt">Correção de bugs críticos e implementação de regras de negócio complexas</li>
+      <li class="len">Fixed critical bugs and implemented complex business rules; TMS Aurelius ORM, SQL Server, Jenkins CI</li>
+    </ul>
+    <div class="et">
+      <span class="tag">Delphi 10.4</span><span class="tag">TMS Aurelius</span><span class="tag">SQL Server</span><span class="tag">Jenkins</span>
+    </div>
+  </div>
+
+  <div class="ei">
+    <div class="ec">commit 3a8b1c2 · Aug 2022 → Nov 2023</div>
+    <div class="er">Software Engineer / Delphi Developer<span class="em"> @ GVdasa Inteligência Educacional</span></div>
+    <div class="ed"><span class="lpt">Remoto · ERP Educacional</span><span class="len">Remote · Educational ERP</span></div>
+    <ul class="el">
+      <li class="lpt">Top 5 em entregas de chamados em time de 80 colaboradores — alto índice de resolução e baixo retrabalho</li>
+      <li class="len">Ranked Top 5 in ticket resolution among a team of 80 engineers, with high fix rate and minimal rework</li>
+      <li class="lpt">ERP educacional em Delphi 5/6/10.2 — módulos: contabilização, boletos, NF-e, NFS-e</li>
+      <li class="len">Educational ERP in Delphi 5/6/10.2 — modules for accounting, billing, NF-e, NFS-e</li>
+      <li class="lpt">Refatorou processo crítico de impressão, resolvendo falha e garantindo retenção de cliente estratégico</li>
+      <li class="len">Refactored critical printing workflow, resolving integration failure and securing strategic client retention</li>
+    </ul>
+    <div class="et">
+      <span class="tag">Delphi 10.2</span><span class="tag">SQL Server</span><span class="tag">Azure DevOps</span><span class="tag">Scrum</span>
+    </div>
+  </div>
+
+  <div class="ei">
+    <div class="ec">commit 1f4e6d8 · Aug 2020 → Aug 2022</div>
+    <div class="er">Software Engineer / Delphi Developer<span class="em"> @ Focus Center</span></div>
+    <div class="ed"><span class="lpt">Remoto · ERP Varejo/Atacado</span><span class="len">Remote · Retail/Wholesale ERP</span></div>
+    <ul class="el">
+      <li class="lpt">Módulo DRE criado do zero — reduziu rotina de gestão de 3 dias para 1 dia (ganho de 66%)</li>
+      <li class="len">Built DRE (income statement) module from scratch — reduced manager routine from 3 to 1 day (66% gain)</li>
+      <li class="lpt">Integração TEF (maquininhas de cartão) — expandiu capacidade do produto para clientes de varejo</li>
+      <li class="len">Implemented TEF payment integration (card machine), expanding retail product capabilities</li>
+      <li class="lpt">ERP em Delphi com integrações C# .NET e Angular; bancos Firebird e MySQL</li>
+      <li class="len">Developed retail/wholesale ERP in Delphi; integrations in C# .NET and Angular; Firebird, MySQL</li>
+    </ul>
+    <div class="et">
+      <span class="tag">Delphi</span><span class="tag">C# .NET</span><span class="tag">Firebird</span><span class="tag">MySQL</span><span class="tag">Angular</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section id="skills">
+  <div class="sh">htop --filter=skills</div>
+  <div class="sg">
+    <div class="sk">
+      <div class="skt">// DATA ENGINEERING</div>
+      <div class="si"><div class="sl"><span class="sn">ETL / ELT Pipelines</span><span class="sp">90%</span></div><div class="sbg"><div class="sbf" data-w="90"></div></div></div>
+      <div class="si"><div class="sl"><span class="sn">Oracle PL/SQL</span><span class="sp">85%</span></div><div class="sbg"><div class="sbf" data-w="85"></div></div></div>
+      <div class="si"><div class="sl"><span class="sn">REST APIs — integração</span><span class="sp">85%</span></div><div class="sbg"><div class="sbf" data-w="85"></div></div></div>
+      <div class="si"><div class="sl"><span class="sn">Python · Pandas · PySpark</span><span class="sp">80%</span></div><div class="sbg"><div class="sbf" data-w="80"></div></div></div>
+      <div class="si"><div class="sl"><span class="sn">AWS S3 · EC2</span><span class="sp">70%</span></div><div class="sbg"><div class="sbf" data-w="70"></div></div></div>
+      <div class="si"><div class="sl"><span class="sn">Apache Airflow</span><span class="sp">70%</span></div><div class="sbg"><div class="sbf" data-w="70"></div></div></div>
+      <div class="si"><div class="sl"><span class="sn">Snowflake</span><span class="sp">65%</span></div><div class="sbg"><div class="sbf" data-w="65"></div></div></div>
+    </div>
+    <div class="sk">
+      <div class="skt">// DATABASES & DEVOPS</div>
+      <div class="si"><div class="sl"><span class="sn">PostgreSQL · SQL Server</span><span class="sp">90%</span></div><div class="sbg"><div class="sbf" data-w="90"></div></div></div>
+      <div class="si"><div class="sl"><span class="sn">Git · GitHub · SVN</span><span class="sp">90%</span></div><div class="sbg"><div class="sbf" data-w="90"></div></div></div>
+      <div class="si"><div class="sl"><span class="sn">MySQL · Firebird</span><span class="sp">80%</span></div><div class="sbg"><div class="sbf" data-w="80"></div></div></div>
+      <div class="si"><div class="sl"><span class="sn">Azure DevOps · Jira</span><span class="sp">80%</span></div><div class="sbg"><div class="sbf" data-w="80"></div></div></div>
+      <div class="si"><div class="sl"><span class="sn">DUnit · DUnitX</span><span class="sp">75%</span></div><div class="sbg"><div class="sbf" data-w="75"></div></div></div>
+      <div class="si"><div class="sl"><span class="sn">Jenkins CI/CD</span><span class="sp">60%</span></div><div class="sbg"><div class="sbf" data-w="60"></div></div></div>
+    </div>
+    <div class="sk">
+      <div class="skt">// SOFTWARE DEVELOPMENT</div>
+      <div class="si"><div class="sl"><span class="sn">Delphi 5–11 (especialista)</span><span class="sp">95%</span></div><div class="sbg"><div class="sbf" data-w="95"></div></div></div>
+      <div class="si"><div class="sl"><span class="sn">C# .NET Framework/Core</span><span class="sp">60%</span></div><div class="sbg"><div class="sbf" data-w="60"></div></div></div>
+      <div class="si"><div class="sl"><span class="sn">HTML · CSS · JavaScript</span><span class="sp">55%</span></div><div class="sbg"><div class="sbf" data-w="55"></div></div></div>
+      <div class="si"><div class="sl"><span class="sn">Angular · React</span><span class="sp">40%</span></div><div class="sbg"><div class="sbf" data-w="40"></div></div></div>
+    </div>
+    <div class="sk">
+      <div class="skt">// IDIOMAS / LANGUAGES</div>
+      <div class="si"><div class="sl"><span class="sn">Português (nativo)</span><span class="sp">100%</span></div><div class="sbg"><div class="sbf" data-w="100"></div></div></div>
+      <div class="si"><div class="sl"><span class="sn">English — Fluent (TOEIC)</span><span class="sp">90%</span></div><div class="sbg"><div class="sbf" data-w="90"></div></div></div>
+      <div class="si"><div class="sl"><span class="sn">Français — Básico (A2)</span><span class="sp">25%</span></div><div class="sbg"><div class="sbf" data-w="25"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EDUCATION ── -->
+<section id="education">
+  <div class="sh">
+    <span class="lpt">ls -la educação/</span>
+    <span class="len">ls -la education/</span>
+  </div>
+  <div class="edu">
+    <div class="edg"><span class="lpt">Pós-graduação em Engenharia de Dados</span><span class="len">Postgraduate in Data Engineering</span></div>
+    <div class="eds">Faculdade Focus</div>
+    <div class="edd">01/2025 – 12/2025</div>
+  </div>
+  <div class="edu">
+    <div class="edg"><span class="lpt">Pós-graduação em Análise de Dados</span><span class="len">Postgraduate in Data Analysis</span></div>
+    <div class="eds">Faculdade Descomplica</div>
+    <div class="edd">11/2025 – 04/2026</div>
+  </div>
+  <div class="edu">
+    <div class="edg"><span class="lpt">Pós-graduação em Engenharia de Software</span><span class="len">Postgraduate in Software Engineering</span></div>
+    <div class="eds">Faculdade Descomplica</div>
+    <div class="edd">11/2026 – 04/2027</div>
+  </div>
+  <div class="edu">
+    <div class="edg"><span class="lpt">Tecnólogo em Análise e Desenvolvimento de Sistemas</span><span class="len">B.Sc. in Systems Analysis and Development</span></div>
+    <div class="eds">Estácio</div>
+    <div class="edd">2021 – 2023</div>
+  </div>
+</section>
+
+<!-- ── REPOS ── -->
+<section id="repos">
+  <div class="sh">
+    <span>gh repo list arturandrade199-dot</span>
+  </div>
+  <div id="repos-container">
+    <p style="color:var(--dm);font-size:12px"><span class="lpt">Carregando repositórios...</span><span class="len">Loading repositories...</span></p>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="sh">
+    <span class="lpt">cat contato.json</span>
+    <span class="len">cat contact.json</span>
+  </div>
+  <div class="cg">
+    <a class="ci" href="mailto:arturloureiro.dev@gmail.com">
+      <span class="cic">✉</span>
+      <div><span class="cil">email</span><span class="civ">arturloureiro.dev@gmail.com</span></div>
+    </a>
+    <a class="ci" href="https://linkedin.com/in/artur-loureiro-7abbb8135" target="_blank">
+      <span class="cic" style="font-size:12px;font-weight:700">in</span>
+      <div><span class="cil">linkedin</span><span class="civ">artur-loureiro-7abbb8135</span></div>
+    </a>
+    <a class="ci" href="https://github.com/arturandrade199-dot" target="_blank">
+      <span class="cic">⌥</span>
+      <div><span class="cil">github</span><span class="civ">arturandrade199-dot</span></div>
+    </a>
+    <a class="ci" href="tel:+5524992065490">
+      <span class="cic">☎</span>
+      <div><span class="cil"><span class="lpt">telefone</span><span class="len">phone</span></span><span class="civ">(24) 99206-5490</span></div>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span class="lpt">© 2026 Artur Loureiro · Feito com HTML · CSS · JavaScript</span>
+  <span class="len">© 2026 Artur Loureiro · Built with HTML · CSS · JavaScript</span>
+</footer>
+
+<script>
+// ── LANG ─────────────────────────────────────────────────────
+let lang = 'pt';
+
+function applyLang() {
+  document.querySelectorAll('.lpt').forEach(el => {
+    el.style.display = lang === 'pt' ? '' : 'none';
+  });
+  document.querySelectorAll('.len').forEach(el => {
+    el.style.display = lang === 'en' ? '' : 'none';
+  });
+}
+
+function toggleLang() {
+  lang = lang === 'pt' ? 'en' : 'pt';
+  document.getElementById('langBtn').textContent = lang === 'pt' ? '--lang=en' : '--lang=pt';
+  applyLang();
+}
+
+// ── BOOT SEQUENCE ─────────────────────────────────────────────
+const bootLines = [
+  { t: 'Inicializando artur-loureiro-portfolio v1.0.0...', c: 'dm' },
+  { t: '> Verificando dependências...', c: 'dm' },
+  { t: '> Carregando stack: Python · PL/SQL · PySpark · Airflow · AWS · Snowflake', c: 'c' },
+  { t: '', c: '' },
+  { t: '[████████████████████████████████████] 100%', c: 'g' },
+  { t: '', c: '' },
+  { t: '> SISTEMA INICIALIZADO', c: 'y' },
+  { t: '  Nome ........: ARTUR LOUREIRO', c: 'br' },
+  { t: '  Cargo .......: ENGENHEIRO DE DADOS', c: 'br' },
+  { t: '  Experiência .: 6+ anos em engenharia de software', c: 'br' },
+  { t: '  Stack .......: Oracle PL/SQL · Python · Airflow · AWS', c: 'br' },
+  { t: '  Local .......: Rio de Janeiro, RJ — Remoto', c: 'br' },
+  { t: '  Inglês ......: Fluente (certificação TOEIC) ✓', c: 'g' },
+  { t: '  Status ......: Disponível para oportunidades remotas ✓', c: 'g' },
+  { t: '', c: '' },
+  { t: '$ portfolio --render --section=all', c: 'dm' },
+];
+
+function runBoot() {
+  const container = document.getElementById('boot-out');
+  let i = 0;
+  function next() {
+    if (i >= bootLines.length) {
+      setTimeout(() => {
+        const hero = document.getElementById('hero');
+        hero.style.display = 'block';
+        hero.style.opacity = '0';
+        hero.style.transition = 'opacity .6s';
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => { hero.style.opacity = '1'; });
+        });
+        animateBars();
+      }, 350);
+      return;
+    }
+    const line = bootLines[i++];
+    const span = document.createElement('span');
+    span.className = 'bl' + (line.c ? ' ' + line.c : '');
+    span.textContent = line.t || ' ';
+    container.appendChild(span);
+    setTimeout(next, line.t ? 85 : 35);
+  }
+  next();
+}
+
+// ── SKILL BARS ────────────────────────────────────────────────
+function animateBars() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.sbf').forEach(bar => {
+          requestAnimationFrame(() => { bar.style.width = bar.dataset.w + '%'; });
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.sk').forEach(el => obs.observe(el));
+}
+
+// ── GITHUB REPOS ─────────────────────────────────────────────
+const FEATURED = [
+  {
+    name: 'reforma-tributaria-pipeline',
+    pt: 'Integração com APIs governamentais para a Reforma Tributária — regras fiscais críticas em arquitetura escalável',
+    en: "Government API integration for Brazil's Tax Reform — critical fiscal business rules in scalable architecture",
+    lang: 'PL/SQL · Delphi',
+    url: 'https://github.com/arturandrade199-dot',
+  },
+  {
+    name: 'dre-financial-module',
+    pt: 'Módulo DRE criado do zero — rotina de gestão reduzida de 3 dias para 1 dia (ganho de 66% de produtividade)',
+    en: 'DRE (income statement) module built from scratch — reduced management routine from 3 days to 1 (66% gain)',
+    lang: 'Delphi · Firebird',
+    url: 'https://github.com/arturandrade199-dot',
+  },
+  {
+    name: 'insurance-data-pipelines',
+    pt: 'Pipelines de dados robustos com Oracle PL/SQL para domínio de seguros financeiros e integração REST',
+    en: 'Robust Oracle PL/SQL data pipelines for financial insurance domain with REST API integrations',
+    lang: 'Oracle PL/SQL',
+    url: 'https://github.com/arturandrade199-dot',
+  },
+  {
+    name: 'test-suite-expansion',
+    pt: 'Expansão de suíte de testes DUnit/DUnitX de ~30 para ~120 cenários — cobertura 4x maior',
+    en: 'DUnit/DUnitX test suite expansion from ~30 to ~120 scenarios — 4x coverage increase',
+    lang: 'Delphi · DUnitX',
+    url: 'https://github.com/arturandrade199-dot',
+  },
+  {
+    name: 'tef-payment-integration',
+    pt: 'Integração de pagamentos via TEF (maquininhas de cartão) em ERP de varejo — expansão de capacidade do produto',
+    en: 'TEF payment integration (card machine) in retail ERP — expanding product capabilities for retail clients',
+    lang: 'Delphi · MySQL',
+    url: 'https://github.com/arturandrade199-dot',
+  },
+  {
+    name: 'erp-educational-modules',
+    pt: 'Módulos de NF-e e NFS-e em ERP educacional — Top 5 em resolução de chamados em time de 80 devs',
+    en: 'NF-e and NFS-e modules for educational ERP — Top 5 ticket resolution in a team of 80 engineers',
+    lang: 'Delphi · SQL Server',
+    url: 'https://github.com/arturandrade199-dot',
+  },
+];
+
+function renderRepos(repos) {
+  const container = document.getElementById('repos-container');
+  const noteText = lang === 'pt'
+    ? '📌 Projetos em destaque do currículo — repositórios públicos em breve no GitHub'
+    : '📌 Featured projects from CV — public GitHub repositories coming soon';
+
+  if (!repos || repos.length === 0) {
+    container.innerHTML = `
+      <p class="repos-note lpt">📌 Projetos em destaque do currículo — repositórios públicos em breve no GitHub</p>
+      <p class="repos-note len">📌 Featured projects from CV — public GitHub repositories coming soon</p>
+      <div class="rg">${FEATURED.map(r => `
+        <a class="rc" href="${r.url}" target="_blank">
+          <div class="rn">${r.name}</div>
+          <div class="rd lpt">${r.pt}</div>
+          <div class="rd len">${r.en}</div>
+          <div class="rf"><span class="rl">${r.lang}</span><span class="rs">—</span></div>
+        </a>`).join('')}
+      </div>`;
+  } else {
+    container.innerHTML = `<div class="rg">${repos.map(r => `
+      <a class="rc" href="${r.html_url}" target="_blank">
+        <div class="rn">${r.name}</div>
+        <div class="rd">${r.description || (lang === 'pt' ? 'Sem descrição' : 'No description')}</div>
+        <div class="rf">
+          ${r.language ? `<span class="rl">${r.language}</span>` : ''}
+          <span class="rs">${r.stargazers_count}</span>
+        </div>
+      </a>`).join('')}
+    </div>`;
+  }
+  applyLang();
+}
+
+async function loadRepos() {
+  try {
+    const res = await fetch('https://api.github.com/users/arturandrade199-dot/repos?sort=updated&per_page=6');
+    if (!res.ok) throw new Error();
+    const repos = await res.json();
+    renderRepos(repos);
+  } catch {
+    renderRepos([]);
+  }
+}
+
+// ── INIT ──────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  applyLang();
+  runBoot();
+  loadRepos();
+});
+</script>
+</body>
+</html>
